@@ -33,3 +33,7 @@ function shuffle (src) {
 /**********************************************
  * YOUR CODE BELOW
  **********************************************/
+
+function compare (userString, spellString) {
+  return userString === spellString ? true : false;
+}
