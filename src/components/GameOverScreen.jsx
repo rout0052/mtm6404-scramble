@@ -23,17 +23,19 @@ const GameOverScreen = ({ resetHandler, playerStats, highScore, modalStatus }) =
     }
 
     return (
+        // Toggles the is-active class depending on the status of gameOver
         <div className={`modal ${modalStatus ? 'is-active' : ''}`}>
             <div className="modal-background"></div>
             <div className="modal-card has-text-centered">
                 <header className="modal-card-head is-block is-shadowless pb-0">
                     <h2 className="modal-card-title is-size-1 is-family-code is-uppercase has-text-weight-extrabold mb-2">Game Over</h2>
+                    {/* Uses playerRank() to get the users rank. The ternary is used so that if the user is a commoner, it does not show Scramblemancer at all */}
                     <p className="subtitle is-size-3"><strong>Rank:</strong> {playerRank()} {points.value !== 0 ? 'Scramblemancer' : ''}</p>
                 </header>
                 <section className="modal-card-body">
                     
                     <h3 className="is-size-3 has-text-weight-medium mb-2">Player Stats:</h3>
-                    
+                    {/* Loops through the playerStats to show passes used, points scored, and strikes incurred. */}
                     {playerStats.map(stat => (
                         <p className=" is-size-5 " key={stat.key}>
                             <strong>{stat.name}: </strong>
@@ -41,12 +43,14 @@ const GameOverScreen = ({ resetHandler, playerStats, highScore, modalStatus }) =
                         </p>
                         
                     ))}
-
+                    
+                    {/* Shows high score, and conditionally adds a badge that says New if you have beaten your highscore */}
                     <h4 className="is-size-4 mt-6"><span className="has-text-weight-extrabold">Your Highscore: </span>{highScore.value} {highScore.new ? <span className="tag is-success">New</span> : ''}</h4>
 
 
                 </section>
                 <footer className="modal-card-foot is-flex is-justify-content-center">
+                    {/* Start over button using the passed prop resetHandler */}
                     <button onClick={resetHandler} className="button is-info">Want to play again? Start Over! </button>                    
                 </footer>
             </div>
